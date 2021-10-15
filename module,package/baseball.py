@@ -17,15 +17,22 @@ def load_history():
             # print(line.rstrip())
             line_data = line.rstrip().split('\t')
             count_list.append(line_data[1])
-   count_list.sort()
-   return count_list[:3]
-print(answer)
+   #중복제거
+    count_list = set(count_list)
+    count_list = list(count_list)
+    count_list.sort()
+    return count_list[:3]
 while True:
 # 숫자3자리 중복없이 묻자
     player = input("숫자 세자리는?(t:top3)")  #player: "123" "fun"
     if player == 't':
+    try:
         history = load_history()
+    except FileNotFoundError:
+        print('history 파일이 없어요.ㅠㅠ')
         continue
+    print(history)
+    continue
     try:    #숫자가 아닐 때 예외 처리
         player_int = int(player)    #ValueError
     except ValueError:
