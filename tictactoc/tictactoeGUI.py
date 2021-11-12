@@ -21,8 +21,37 @@ class TictactoeGUI:
         #매우중요함 시험 출제 가능성 높음!!!!!!! click_handler의 괄호없다 지금 실행하는 것이 아니다.
         self.root.mainloop()
     def click_handler(self,event):
-        print('click')
+        # input event.x, event.y -> row, col
+        row, col = self.coordinate_to_position(event.x,event.y)
+        # set row, col
+        self.game_engine.set(row,col)
+        # show board
+        self.game_engine.show_board()
+        # set winner
+
+        #승자가 있거나 무승부일 때, 게임오버, 결과 출력하자
+        #change turn
+
+        print(event.x, event.y)
+
     def draw_board(self):
         pass
+    def coordinate_to_position(self,x,y):
+       # if 0<= x <100:
+       #      col = 1
+       # elif 100 <= x < 200:
+       #     col = 2
+       # elif 200 <= x < 300:
+       #     col = 3
+       #
+       # if 0 <= y < 100:
+       #     row = 1
+       # elif 100 <= y < 200:
+       #     row = 2
+       # elif 200 <= y < 300:
+       #     row = 3
+       row = y // 100 + 1
+       col = x // 100 + 1
+       return row, col
 if __name__ == '__main__':
     ttt_GUI = TictactoeGUI()
